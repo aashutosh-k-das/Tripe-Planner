@@ -4,15 +4,13 @@ WanderAI is an intelligent, premium SaaS-style itinerary generator powered by Go
 
 ## 📸 Screenshots
 
-*Note: Please add your screenshots to the repository and name them `screenshot1.png`, `screenshot2.png`, etc., or update these paths to point to your image files.*
-
 | Dashboard | Generated Itinerary |
 | :---: | :---: |
-| ![Dashboard](screenshot1.png) | ![Itinerary View](screenshot2.png) |
+| ![Dashboard](assets/screenshot1.png) | ![Itinerary View](assets/screenshot2.png) |
 
 | Stop Details | Map Modal |
 | :---: | :---: |
-| ![Stop Details](screenshot3.png) | ![Map Modal](screenshot4.png) |
+| ![Stop Details](assets/screenshot3.png) | ![Map Modal](assets/screenshot4.png) |
 
 ## 🏗️ Working Diagram
 
