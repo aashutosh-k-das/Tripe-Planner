@@ -272,15 +272,35 @@ body {
 }
 
 .day-header h3 {
-  color: var(--primary);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
-
 .day-header p {
-  color: var(--text-primary);
-  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+.day-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.route-map-btn {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary-color);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
   font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.route-map-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
 }
 
 .stops-list {
@@ -340,19 +360,30 @@ body {
 .stop-title-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 4px;
 }
-
 .stop-title-row h4 {
-  font-size: 1rem;
-  color: var(--text-primary);
+  font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
-
-.stop-title-row span {
+.stop-title-row span.stop-time {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-page);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+.cost-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #059669;
+  background: #d1fae5;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: auto;
 }
 
 .stop-description {
@@ -534,3 +565,131 @@ dialog::backdrop {
     white-space: normal;
   }
 }
+
+/* ---------------------------------
+   NEW FEATURE STYLES
+----------------------------------- */
+
+/* Weather Widget */
+.weather-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: white;
+  border: 1px solid var(--border-color);
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+  margin: 0 auto 32px;
+  width: fit-content;
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.weather-icon {
+  color: #3b82f6;
+}
+
+/* History / My Trips */
+.history-dropdown {
+  position: relative;
+}
+.history-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 8px 0;
+}
+.history-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.history-item:last-child {
+  border-bottom: none;
+}
+.history-item:hover {
+  background: #f8fafc;
+}
+.history-item-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history-item-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.no-history {
+  padding: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Action Bar (Print / Save) */
+.itinerary-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+/* ---------------------------------
+   PRINT STYLES
+----------------------------------- */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  /* Hide UI elements that shouldn't be printed */
+  .app-header,
+  .form-card,
+  .api-panel,
+  .itinerary-actions,
+  .app-footer,
+  .history-menu,
+  .btn-outline,
+  .btn-primary {
+    display: none !important;
+  }
+  
+  .app-container {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  /* Flatten shadows and borders for clean printing */
+  .day-card, .stop-card, .weather-widget {
+    box-shadow: none !important;
+    border: 1px solid #e2e8f0 !important;
+    page-break-inside: avoid;
+  }
+  
+  .day-card {
+    margin-bottom: 20px;
+  }
+  
+  /* Ensure background colors print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+

@@ -16,6 +16,7 @@ const MOCK_ITINERARIES = {
             name: "Ichiran Ramen Shinjuku",
             time: "11:30 AM",
             category: "food",
+            cost_estimate: "$15",
             notes: "Classic tonkotsu ramen served in private solo booths. Order customization sheet via ticket machine."
           },
           {
@@ -23,6 +24,7 @@ const MOCK_ITINERARIES = {
             name: "Akihabara Electric Town",
             time: "1:30 PM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "Explore multi-level retro gaming stores, anime shops, and see the bright electric signs."
           },
           {
@@ -30,6 +32,7 @@ const MOCK_ITINERARIES = {
             name: "teamLab Planets TOKYO",
             time: "4:00 PM",
             category: "activity",
+            cost_estimate: "$30",
             notes: "An immersive body-on digital art museum. Book tickets weeks in advance and prepare to walk barefoot through water."
           },
           {
@@ -37,6 +40,7 @@ const MOCK_ITINERARIES = {
             name: "Shibuya Crossing & Hachiko",
             time: "7:00 PM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "Experience the world's busiest pedestrian crossing. View it from the second-floor glass windows of surrounding cafes."
           },
           {
@@ -44,6 +48,7 @@ const MOCK_ITINERARIES = {
             name: "Shibuya Sky Observation Deck",
             time: "8:30 PM",
             category: "activity",
+            cost_estimate: "$25",
             notes: "Stunning open-air rooftop observatory. Ideal for 360-degree panoramic views of Tokyo's neon skyline at night."
           }
         ]
@@ -57,6 +62,7 @@ const MOCK_ITINERARIES = {
             name: "Senso-ji Temple",
             time: "9:00 AM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "Tokyo's oldest and most iconic Buddhist temple in Asakusa. Arrive early to beat the crowds and browse Nakamise-dori shops."
           },
           {
@@ -64,6 +70,7 @@ const MOCK_ITINERARIES = {
             name: "Kura Sushi Asakusa",
             time: "12:00 PM",
             category: "food",
+            cost_estimate: "$20",
             notes: "Interactive revolving conveyor belt sushi with gamified capsule toys. Fun and affordable dining experience."
           },
           {
@@ -71,6 +78,7 @@ const MOCK_ITINERARIES = {
             name: "Meiji Jingu Shrine",
             time: "2:00 PM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "A serene Shinto shrine dedicated to Emperor Meiji, nestled inside a dense forest in the heart of Harajuku."
           },
           {
@@ -78,6 +86,7 @@ const MOCK_ITINERARIES = {
             name: "Yoyogi Park Rest",
             time: "4:30 PM",
             category: "rest",
+            cost_estimate: "Free",
             notes: "Relax under the tall trees. Great spot for people-watching and taking a peaceful break after walking around Harajuku."
           },
           {
@@ -85,6 +94,7 @@ const MOCK_ITINERARIES = {
             name: "Robot Restaurant Tribute & Izakaya",
             time: "7:00 PM",
             category: "food",
+            cost_estimate: "$45",
             notes: "Dine on delicious yakitori and drinks in the narrow, lantern-lit alleys of Omoide Yokocho."
           }
         ]
@@ -98,6 +108,7 @@ const MOCK_ITINERARIES = {
             name: "Tsukiji Outer Market",
             time: "8:30 AM",
             category: "food",
+            cost_estimate: "$25",
             notes: "Try fresh street food like tamagoyaki (sweet omelet), fresh oysters, and high-quality sushi rolls."
           },
           {
@@ -105,6 +116,7 @@ const MOCK_ITINERARIES = {
             name: "Hamarikyu Gardens",
             time: "10:30 AM",
             category: "sightseeing",
+            cost_estimate: "$3",
             notes: "Beautiful Edo-period garden featuring seawater ponds. Enjoy matcha tea at the wooden teahouse in the center."
           },
           {
@@ -112,6 +124,7 @@ const MOCK_ITINERARIES = {
             name: "Sumida River Cruise",
             time: "1:00 PM",
             category: "transport",
+            cost_estimate: "$15",
             notes: "Board a futuristic boat ride down the river to Odaiba. Offers unique views of Tokyo's architectural bridges."
           },
           {
@@ -119,6 +132,7 @@ const MOCK_ITINERARIES = {
             name: "Odaiba Seaside Park",
             time: "3:00 PM",
             category: "activity",
+            cost_estimate: "Free",
             notes: "Walk along the artificial beach, view the miniature Statue of Liberty, and shop at DiverCity Tokyo Plaza."
           },
           {
@@ -126,6 +140,7 @@ const MOCK_ITINERARIES = {
             name: "Odaiba Onsen Monogatari Rest",
             time: "6:00 PM",
             category: "rest",
+            cost_estimate: "$25",
             notes: "Relax your muscles in the hot spring pools and dress in traditional yukata robes."
           }
         ]
@@ -146,6 +161,7 @@ const MOCK_ITINERARIES = {
             name: "Careette Trocadéro",
             time: "9:00 AM",
             category: "food",
+            cost_estimate: "$18",
             notes: "Enjoy their famous rich hot chocolate, buttery croissants, and colorful macarons with a view."
           },
           {
@@ -153,6 +169,7 @@ const MOCK_ITINERARIES = {
             name: "Eiffel Tower",
             time: "10:30 AM",
             category: "sightseeing",
+            cost_estimate: "$30",
             notes: "Ascend to the summit for breathtaking views. Book tickets online months in advance to skip lines."
           },
           {
@@ -160,6 +177,7 @@ const MOCK_ITINERARIES = {
             name: "Champ de Mars Stroll",
             time: "1:00 PM",
             category: "rest",
+            cost_estimate: "Free",
             notes: "Sit on the lawns for a mini picnic with cheese and baguettes. A perfect spot to rest your feet."
           },
           {
@@ -167,6 +185,7 @@ const MOCK_ITINERARIES = {
             name: "Seine River Cruise",
             time: "3:00 PM",
             category: "transport",
+            cost_estimate: "$20",
             notes: "Board a Bateaux Parisiens boat near the Eiffel Tower for a historic 1-hour cruise under Paris's beautiful bridges."
           },
           {
@@ -174,6 +193,7 @@ const MOCK_ITINERARIES = {
             name: "Le Relais de l'Entrecôte",
             time: "7:30 PM",
             category: "food",
+            cost_estimate: "$35",
             notes: "Famous for serving only one dish: steak frites with a secret herb sauce. Arrive early to queue."
           }
         ]
@@ -187,6 +207,7 @@ const MOCK_ITINERARIES = {
             name: "Louvre Museum",
             time: "9:00 AM",
             category: "sightseeing",
+            cost_estimate: "$22",
             notes: "Enter via the glass pyramid. Prioritize seeing the Mona Lisa, Winged Victory, and Venus de Milo."
           },
           {
@@ -194,6 +215,7 @@ const MOCK_ITINERARIES = {
             name: "Tuileries Garden",
             time: "12:30 PM",
             category: "rest",
+            cost_estimate: "Free",
             notes: "Grab one of the iconic green metal chairs near the central fountains and relax under the trees."
           },
           {
@@ -201,6 +223,7 @@ const MOCK_ITINERARIES = {
             name: "Musée de l'Orangerie",
             time: "2:00 PM",
             category: "activity",
+            cost_estimate: "$15",
             notes: "View Claude Monet's massive Water Lilies murals in their custom-built curved white rooms."
           },
           {
@@ -208,6 +231,7 @@ const MOCK_ITINERARIES = {
             name: "Champs-Élysées Walk",
             time: "4:00 PM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "Walk up the famous avenue from Place de la Concorde to the Arc de Triomphe for shopping and sights."
           },
           {
@@ -215,6 +239,7 @@ const MOCK_ITINERARIES = {
             name: "Le Comptoir de La Gastronomie",
             time: "7:30 PM",
             category: "food",
+            cost_estimate: "$60",
             notes: "Classic Parisian bistro specializing in duck breast, foie gras, and escargot. Highly recommended to book."
           }
         ]
@@ -228,6 +253,7 @@ const MOCK_ITINERARIES = {
             name: "Sacre-Coeur Basilica",
             time: "9:30 AM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "Visit the stunning white basilica on top of the hill. Offers one of the best free panoramic views of Paris."
           },
           {
@@ -235,6 +261,7 @@ const MOCK_ITINERARIES = {
             name: "Place du Tertre Artist Market",
             time: "11:00 AM",
             category: "activity",
+            cost_estimate: "Free",
             notes: "Watch local street painters create portraits. Wander the cobbled alleys of Montmartre for vintage vibes."
           },
           {
@@ -242,6 +269,7 @@ const MOCK_ITINERARIES = {
             name: "Pink Mamma Montmartre",
             time: "12:30 PM",
             category: "food",
+            cost_estimate: "$35",
             notes: "A stunning 4-story Italian trattoria covered in ivy. Famous for truffle pasta and photo-worthy glass roof."
           },
           {
@@ -249,6 +277,7 @@ const MOCK_ITINERARIES = {
             name: "Metro to Latin Quarter",
             time: "3:00 PM",
             category: "transport",
+            cost_estimate: "$2",
             notes: "Take Paris Metro Line 4 down to Saint-Michel. A quick and classic way to travel like a local."
           },
           {
@@ -256,6 +285,7 @@ const MOCK_ITINERARIES = {
             name: "Shakespeare and Company",
             time: "4:00 PM",
             category: "sightseeing",
+            cost_estimate: "Free",
             notes: "Historic English-language bookstore near Notre Dame. Step inside to see the reading rooms and resident cat."
           }
         ]
@@ -309,37 +339,37 @@ function generateGenericMock(userInput) {
     {
       title: "Arrival & City Highlights",
       stops: [
-        { name: `Historic Center of ${dest}`, cat: "sightseeing", notes: `Explore the most historical landmarks of ${dest} and learn about local culture.`, time: "10:00 AM" },
-        { name: "Local Cafe & Bistro", cat: "food", notes: "Taste local specialties and rest after a long morning of walking.", time: "12:30 PM" },
-        { name: "Central Plaza Walk", cat: "activity", notes: "Stroll through the main square, take photos, and do some light shopping.", time: "3:00 PM" },
-        { name: "Sunset Viewpoint", cat: "rest", notes: "A serene spot to relax and watch the sunset over the city skyline.", time: "6:00 PM" }
+        { name: `Historic Center of ${dest}`, cat: "sightseeing", notes: `Explore the most historical landmarks of ${dest} and learn about local culture.`, time: "10:00 AM", cost_estimate: "Free" },
+        { name: "Local Cafe & Bistro", cat: "food", notes: "Taste local specialties and rest after a long morning of walking.", time: "12:30 PM", cost_estimate: "$15" },
+        { name: "Central Plaza Walk", cat: "activity", notes: "Stroll through the main square, take photos, and do some light shopping.", time: "3:00 PM", cost_estimate: "Free" },
+        { name: "Sunset Viewpoint", cat: "rest", notes: "A serene spot to relax and watch the sunset over the city skyline.", time: "6:00 PM", cost_estimate: "Free" }
       ]
     },
     {
       title: "Art, Museums & Culture",
       stops: [
-        { name: "City National Museum", cat: "sightseeing", notes: "View renowned local artifacts, paintings, and historical exhibits.", time: "9:30 AM" },
-        { name: "Artisan Market & Street Food", cat: "food", notes: "Grab a quick and delicious bite from local vendors.", time: "1:00 PM" },
-        { name: "Guided Architecture Tour", cat: "activity", notes: "Learn about the unique building styles and hidden gems of the city.", time: "2:30 PM" },
-        { name: "River Walk or Canal Cruise", cat: "transport", notes: "Enjoy a peaceful ride or walk along the city's main waterway.", time: "5:00 PM" }
+        { name: "City National Museum", cat: "sightseeing", notes: "View renowned local artifacts, paintings, and historical exhibits.", time: "9:30 AM", cost_estimate: "$20" },
+        { name: "Artisan Market & Street Food", cat: "food", notes: "Grab a quick and delicious bite from local vendors.", time: "1:00 PM", cost_estimate: "$10" },
+        { name: "Guided Architecture Tour", cat: "activity", notes: "Learn about the unique building styles and hidden gems of the city.", time: "2:30 PM", cost_estimate: "$25" },
+        { name: "River Walk or Canal Cruise", cat: "transport", notes: "Enjoy a peaceful ride or walk along the city's main waterway.", time: "5:00 PM", cost_estimate: "$15" }
       ]
     },
     {
       title: "Nature & Local Neighborhoods",
       stops: [
-        { name: "Botanical Gardens", cat: "sightseeing", notes: "Spend the morning surrounded by lush exotic plants and serene pathways.", time: "9:00 AM" },
-        { name: "Bohemian Quarter Brunch", cat: "food", notes: "Enjoy trendy cafes and artisanal coffee in a vibrant local neighborhood.", time: "11:30 AM" },
-        { name: "Boutique Shopping", cat: "activity", notes: "Browse local independent shops and pick up unique souvenirs.", time: "2:00 PM" },
-        { name: "Fine Dining Experience", cat: "food", notes: "Treat yourself to a premium dinner at one of the city's top-rated restaurants.", time: "7:00 PM" }
+        { name: "Botanical Gardens", cat: "sightseeing", notes: "Spend the morning surrounded by lush exotic plants and serene pathways.", time: "9:00 AM", cost_estimate: "$10" },
+        { name: "Bohemian Quarter Brunch", cat: "food", notes: "Enjoy trendy cafes and artisanal coffee in a vibrant local neighborhood.", time: "11:30 AM", cost_estimate: "$25" },
+        { name: "Boutique Shopping", cat: "activity", notes: "Browse local independent shops and pick up unique souvenirs.", time: "2:00 PM", cost_estimate: "Varies" },
+        { name: "Fine Dining Experience", cat: "food", notes: "Treat yourself to a premium dinner at one of the city's top-rated restaurants.", time: "7:00 PM", cost_estimate: "$80" }
       ]
     },
     {
       title: "Adventure & Entertainment",
       stops: [
-        { name: "Morning Hike or Bike Ride", cat: "activity", notes: "Get active early with a scenic route around the city outskirts.", time: "8:00 AM" },
-        { name: "Local Brewery or Food Hall", cat: "food", notes: "Refuel with hearty food and local craft beverages.", time: "12:30 PM" },
-        { name: "Amusement or Theme Park", cat: "activity", notes: "Spend the afternoon enjoying thrilling rides and games.", time: "3:00 PM" },
-        { name: "Live Theater or Music Show", cat: "sightseeing", notes: "End the day with an unforgettable local performance.", time: "8:00 PM" }
+        { name: "Morning Hike or Bike Ride", cat: "activity", notes: "Get active early with a scenic route around the city outskirts.", time: "8:00 AM", cost_estimate: "Free" },
+        { name: "Local Brewery or Food Hall", cat: "food", notes: "Refuel with hearty food and local craft beverages.", time: "12:30 PM", cost_estimate: "$20" },
+        { name: "Amusement or Theme Park", cat: "activity", notes: "Spend the afternoon enjoying thrilling rides and games.", time: "3:00 PM", cost_estimate: "$50" },
+        { name: "Live Theater or Music Show", cat: "sightseeing", notes: "End the day with an unforgettable local performance.", time: "8:00 PM", cost_estimate: "$45" }
       ]
     }
   ];
@@ -356,7 +386,8 @@ function generateGenericMock(userInput) {
         name: stop.name,
         time: stop.time,
         category: stop.cat,
-        notes: stop.notes
+        notes: stop.notes,
+        cost_estimate: stop.cost_estimate
       }))
     });
   }
@@ -419,6 +450,7 @@ Given a free-form trip description from the user, generate a day-by-day itinerar
           "name": string,
           "time": string,        // e.g. "9:00 AM" or "Morning"
           "category": string,    // one of: "food", "sightseeing", "activity", "transport", "rest"
+          "cost_estimate": string, // e.g. "$15", "Free", or "Varies"
           "notes": string        // 1-2 sentences, practical tip or description
         }
       ]

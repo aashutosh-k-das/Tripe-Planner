@@ -40,6 +40,12 @@ export function useItineraryGenerator() {
         return;
       }
 
+      // Ensure the itinerary has a unique ID and timestamp for history saving
+      if (!data.id) {
+        data.id = Date.now().toString();
+        data.createdAt = new Date().toISOString();
+      }
+
       setItinerary(data);
       setStatus('success');
     } catch (e) {
@@ -49,5 +55,5 @@ export function useItineraryGenerator() {
     }
   }, []);
 
-  return { status, itinerary, errorMsg, generate };
+  return { status, itinerary, errorMsg, generate, setItinerary, setStatus };
 }
