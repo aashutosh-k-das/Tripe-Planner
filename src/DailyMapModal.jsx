@@ -81,7 +81,7 @@ export default function DailyMapModal({ dayData, destination, onClose }) {
         <div style={{ padding: '24px', position: 'relative' }}>
           {loading && (
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-page)', borderRadius: 'var(--radius-md)' }}>
-              <Loader2 size={32} className="animate-spin-slow" style={{ color: 'var(--primary-color)' }} />
+              <Loader2 size={32} className="animate-spin-slow" style={{ color: 'var(--primary)' }} />
             </div>
           )}
           

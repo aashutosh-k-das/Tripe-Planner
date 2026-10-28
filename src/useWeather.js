@@ -1,28 +1,44 @@
 import { useState, useEffect } from 'react';
 
-export function useWeather(destination) {
+// Pass known coordinates to skip geocoding (curated trips span several towns, e.g. "Delhi, Agra & Jaipur")
+export function useWeather(destination, knownCoords = null) {
   const [weather, setWeather] = useState(null);
+  const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(false);
+  const lat = knownCoords?.[0];
+  const lon = knownCoords?.[1];
 
   useEffect(() => {
     if (!destination) {
       setWeather(null);
+      setPlace(null);
       return;
     }
 
     const fetchWeather = async () => {
       setLoading(true);
       try {
-        // 1. Geocode the destination name to get lat/long using Open-Meteo's geocoding API
-        const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(destination)}&count=1&language=en&format=json`);
-        const geoData = await geoRes.json();
+        let latitude = lat;
+        let longitude = lon;
+        let name = destination.split(/,|&/)[0].trim();
+        let country = '';
 
-        if (!geoData.results || geoData.results.length === 0) {
-          setWeather(null);
-          return;
+        if (latitude == null) {
+          // 1. Geocode the first place name to get lat/long using Open-Meteo's geocoding API
+          const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(name)}&count=1&language=en&format=json`);
+          const geoData = await geoRes.json();
+
+          if (!geoData.results || geoData.results.length === 0) {
+            setWeather(null);
+            setPlace(null);
+            return;
+          }
+
+          ({ latitude, longitude, name, country } = geoData.results[0]);
+          setPlace({ coords: [latitude, longitude], countryCode: geoData.results[0].country_code });
+        } else {
+          setPlace(null);
         }
-
-        const { latitude, longitude, name, country } = geoData.results[0];
 
         // 2. Fetch the current weather for those coordinates
         const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&temperature_unit=celsius`);
@@ -46,19 +62,20 @@ export function useWeather(destination) {
             temp,
             description,
             emoji,
-            location: `${name}, ${country}`
+            location: country ? `${name}, ${country}` : name
           });
         }
       } catch (error) {
         console.error("Failed to fetch weather:", error);
         setWeather(null);
+        setPlace(null);
       } finally {
         setLoading(false);
       }
     };
 
     fetchWeather();
-  }, [destination]);
+  }, [destination, lat, lon]);
 
-  return { weather, loading };
+  return { weather, place, loading };
 }

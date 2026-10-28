@@ -58,12 +58,20 @@ graph TD
 3. Click **Generate Itinerary**.
 4. Browse your beautifully formatted, day-by-day itinerary with categorized stops.
 5. Click on any specific stop to open a modal with more details and an interactive Google Map of the location.
+6. Or scroll down to **Discover Incredible India** and pick a curated trip by region and Indian area, or search by city/country.
+7. Check **Getting there** to compare flight, train and road from your city. Pick it from the list, or write it in your request (e.g. "Mumbai to Goa").
+8. Check the **Estimated budget** card for a trip total (and per-day totals on each day card), parsed from each stop's cost estimate.
+9. Tick the circle on a stop to mark it **visited** — progress is tracked per day and for the whole trip, and saved with the trip in **My Trips**.
+10. Use the **category chips** (Food, Sightseeing, Transport…) to filter stops.
+11. Pick a start date and click **Add to Calendar** to download an `.ics` file you can import into Google Calendar, Apple Calendar or Outlook.
+12. Manage saved trips from **My Trips** — delete individual trips or clear them all.
 
 ## 🤖 AI-Usage Note
 
 This project leverages the **Google Gemini API** (`@google/generative-ai`) to transform natural language into highly structured JSON data. 
 - **Prompt Engineering**: The application uses a strictly defined JSON schema in its system prompt to ensure the AI always returns parseable, consistent data (days, stops, categories, times, and map search queries).
-- **Fallback Mode**: If the API key is missing or the quota is exceeded, the application gracefully degrades to a premium mock response so the UI and layout can still be evaluated without errors.
+- **Fallback Mode**: Without an API key, the app uses a library of hand-curated itineraries for **43 destinations in 22 countries** (`src/destinations.js`), with a focus on India: 22 Indian trips grouped by area (North, Himalayas, West, South, East & Northeast, Islands), plus Nepal, Bhutan, Sri Lanka, the Maldives and popular international cities. Indian and Nepali trips are priced in ₹ and NPR. Any other destination gets a generic template plan.
+- **Getting There**: Every trip shows how to reach it **by flight, train and road** (and sea, for islands) from 17 Indian cities, with the nearest airport and railhead, route tips, the best time to visit, and *Fastest* / *Budget pick* recommendations (`src/travelInfo.js`). Door-to-door times are distance-based estimates; trips outside the library are geocoded so they still get estimates.
 
 ## ⚠️ Limitations
 
