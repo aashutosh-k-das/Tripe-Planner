@@ -40,11 +40,12 @@ graph TD
    ```
 
 3. **Configure Environment:**
-   You can run the app without an API key using the built-in mock fallback mode. To use live AI generation, you'll need a Google Gemini API key.
-   - Create a `.env` file in the root directory:
-     ```env
-     VITE_GEMINI_API_KEY=your_api_key_here
-     ```
+   You can run the app without an API key: it uses the built-in recommendation engine and curated itineraries. To use live AI, get a free key from [Google AI Studio](https://aistudio.google.com/apikey):
+   ```bash
+   cp .env.example .env
+   # then set VITE_GEMINI_API_KEY in .env
+   ```
+   `.env` is git-ignored so your key is never committed.
 
 4. **Run the development server:**
    ```bash
@@ -67,6 +68,10 @@ graph TD
 12. Manage saved trips from **My Trips** — delete individual trips or clear them all.
 
 ## 🤖 AI-Usage Note
+
+- **Chat assistant ("Ask AI" button)**: A floating chatbot that answers travel questions in a conversation: where to go, which place is better, how to reach a place by flight, train or road, the best time and live weather, trip cost, what to pack, and "plan 3 days in Goa", which builds the itinerary on the page. It remembers the place you're discussing and knows which trip is open. With a Gemini key it's a real multi-turn Gemini chat, grounded in the app's destination list (`src/ChatBot.jsx`). Without a key, or if the API fails, a built-in assistant answers from the app's own data (`src/chatAssistant.js`).
+
+- **AI Trip Advisor ("Help me choose")**: Ask in plain words, e.g. *"Goa or Kerala for a honeymoon in December?"*, or set your city, month, days, budget, group and interests. WanderAI ranks the destinations and shows the top 3 picks with match %, reasons, watch-outs and a side-by-side comparison (`src/advisor.js`). The scoring uses season, interests, budget, travel time and trip length. With a Gemini key, Gemini re-ranks those candidates and writes the advice. It can only pick from the app's destinations and facts, which keeps it from inventing places. Without a key, or if the API fails, the built-in engine writes the verdict.
 
 This project leverages the **Google Gemini API** (`@google/generative-ai`) to transform natural language into highly structured JSON data. 
 - **Prompt Engineering**: The application uses a strictly defined JSON schema in its system prompt to ensure the AI always returns parseable, consistent data (days, stops, categories, times, and map search queries).

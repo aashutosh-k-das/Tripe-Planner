@@ -7,6 +7,8 @@ import { stopKey, computeBudget, formatMoney, buildIcs, downloadFile } from './t
 import { DESTINATIONS, REGIONS, INDIA_AREAS, findDestination } from './destinations';
 import { TRAVEL_INFO, ORIGIN_CITIES, inferTravelInfo, estimateRoutes, formatHours, detectOrigin } from './travelInfo';
 import GettingThere from './GettingThere';
+import TripAdvisor from './TripAdvisor';
+import ChatBot from './ChatBot';
 import StopModal from './StopModal';
 import DailyMapModal from './DailyMapModal';
 
@@ -63,6 +65,7 @@ export default function App() {
   const [exploreQuery, setExploreQuery] = useState('');
   const [indiaArea, setIndiaArea] = useState('All');
   const [originCity, setOriginCity] = useState(loadOrigin);
+  const [heroMode, setHeroMode] = useState('plan'); // plan | advisor
   const historyMenuRef = useRef(null);
 
   const { status, itinerary, errorMsg, generate, setItinerary, setStatus } = useItineraryGenerator();
@@ -109,7 +112,7 @@ export default function App() {
       const origin = detectOrigin(userInput);
       if (origin) handleOriginChange(origin);
       setCategoryFilter('all');
-      generate(userInput, ''); // Removed apiKey since we removed the setup panel
+      generate(userInput);
     }
   };
 
@@ -122,16 +125,18 @@ export default function App() {
     }
   };
 
-  const handleExploreDestination = (dest) => {
+  const handleExploreDestination = (dest, days = dest.days.length) => {
     const place = dest.name === dest.country ? dest.name : `${dest.name}, ${dest.country}`;
-    const prompt = `${dest.days.length} days in ${place}`;
+    const prompt = `${days} days in ${place}`;
+    setHeroMode('plan');
     setUserInput(prompt);
     setCategoryFilter('all');
-    generate(prompt, '');
+    generate(prompt);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const loadPastTrip = (pastTrip) => {
+    setHeroMode('plan');
     setItinerary(pastTrip);
     setStatus('success');
     setCategoryFilter('all');
@@ -224,6 +229,7 @@ export default function App() {
     : [];
 
   const isIdle = status !== 'success' && status !== 'loading';
+  const showPlanner = heroMode === 'plan';
 
   // Search spans every region; otherwise show the selected region tab
   const query = exploreQuery.trim().toLowerCase();
@@ -314,15 +320,59 @@ export default function App() {
         {/* Hero + Search */}
         <section className="hero">
           <span className="hero-eyebrow"><Sparkles size={14} /> AI travel planner for India &amp; beyond</span>
-          <h2 className="hero-title">
-            Your next adventure,<br />
-            <em>planned in seconds.</em>
-          </h2>
-          <p className="hero-subtitle">
-            From Himalayan passes to Kerala’s backwaters, describe your dream trip in plain words. Get a day-by-day plan and the easiest way to get there by flight, train or road.
-          </p>
+          {heroMode === 'plan' ? (
+            <>
+              <h2 className="hero-title">
+                Your next adventure,<br />
+                <em>planned in seconds.</em>
+              </h2>
+              <p className="hero-subtitle">
+                From Himalayan passes to Kerala’s backwaters, describe your dream trip in plain words. Get a day-by-day plan and the easiest way to get there by flight, train or road.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 className="hero-title">
+                Not sure where to go?<br />
+                <em>Let AI decide.</em>
+              </h2>
+              <p className="hero-subtitle">
+                Tell us when, how long, your budget and what you love. We’ll rank the best places for you, compare them side by side and explain why.
+              </p>
+            </>
+          )}
 
-          <form onSubmit={handleSubmit} className="search-card">
+          <div className="hero-tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={heroMode === 'plan'}
+              className={`hero-tab ${heroMode === 'plan' ? 'active' : ''}`}
+              onClick={() => setHeroMode('plan')}
+            >
+              <MapPin size={16} /> Plan a trip
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={heroMode === 'advisor'}
+              className={`hero-tab ${heroMode === 'advisor' ? 'active' : ''}`}
+              onClick={() => setHeroMode('advisor')}
+            >
+              <Sparkles size={16} /> Help me choose <span className="hero-tab-badge">AI</span>
+            </button>
+          </div>
+
+          {/* Kept mounted so the advisor's answers survive switching tabs */}
+          <div hidden={heroMode !== 'advisor'}>
+            <TripAdvisor
+              originCity={originCity}
+              onOriginChange={handleOriginChange}
+              onPlanTrip={handleExploreDestination}
+            />
+          </div>
+
+          <form onSubmit={handleSubmit} className="search-card" hidden={heroMode !== 'plan'}>
             <div className="search-input-wrap">
               <MapPin size={20} className="search-input-icon" />
               <textarea
@@ -368,7 +418,7 @@ export default function App() {
         </section>
 
         {/* Error States */}
-        {status === 'error' && errorMsg && (
+        {showPlanner && status === 'error' && errorMsg && (
           <div className="alert-card animate-fade-in">
             <AlertCircle size={20} className="alert-icon" />
             <div>
@@ -378,7 +428,7 @@ export default function App() {
           </div>
         )}
 
-        {status === 'empty' && errorMsg && (
+        {showPlanner && status === 'empty' && errorMsg && (
           <div className="alert-card warning animate-fade-in">
             <AlertCircle size={20} className="alert-icon" />
             <div>
@@ -389,7 +439,7 @@ export default function App() {
         )}
 
         {/* How it works (before the first trip) */}
-        {isIdle && (
+        {showPlanner && isIdle && (
           <section className="features-grid animate-fade-in">
             {FEATURES.map(({ icon: Icon, title, text }, i) => (
               <div key={title} className="feature-card animate-slide-up" style={{ animationDelay: `${i * 0.1}s` }}>
@@ -403,7 +453,7 @@ export default function App() {
         )}
 
         {/* Explore Destinations */}
-        {isIdle && (
+        {showPlanner && isIdle && (
           <section className="explore animate-fade-in">
             <div className="explore-header">
               <div>
@@ -498,7 +548,7 @@ export default function App() {
         )}
 
         {/* Loading skeleton */}
-        {status === 'loading' && (
+        {showPlanner && status === 'loading' && (
           <section className="loading-state animate-fade-in" aria-live="polite">
             <div className="loading-plane">
               <Plane size={28} />
@@ -515,7 +565,7 @@ export default function App() {
         )}
 
         {/* Itinerary Results */}
-        {status === 'success' && itinerary && (
+        {showPlanner && status === 'success' && itinerary && (
           <div className="animate-fade-in">
             {/* Trip Banner */}
             <section className="trip-banner animate-slide-up">
@@ -747,6 +797,15 @@ export default function App() {
 
       {/* Stop Detail Modal (Native Dialog) */}
       <StopModal stop={selectedStop} destination={itinerary?.destination} onClose={() => setSelectedStop(null)} />
+
+      {/* Floating chat assistant */}
+      <ChatBot
+        originCity={originCity}
+        onOriginChange={handleOriginChange}
+        currentDest={status === 'success' ? curatedDest : null}
+        currentTripTitle={status === 'success' ? itinerary?.trip_title : null}
+        onPlanTrip={handleExploreDestination}
+      />
 
       {/* Daily Route Map Modal */}
       <DailyMapModal dayData={selectedDayForMap} destination={itinerary?.destination} onClose={() => setSelectedDayForMap(null)} />
